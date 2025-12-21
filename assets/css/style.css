@@ -254,11 +254,11 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(5, 5, 5, 0.8) !important; backdrop-filter: blur(10px);
-  padding-block: 15px;
-  border-block-end: 1px solid var(--cultured);
-  z-index: 4;
-  transition: var(--transition-1);
+  background-color: rgba(5, 5, 5, 0.6) !important; /* Transparent Black */
+  backdrop-filter: blur(12px); /* Glass blur effect */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 100;
+
 }
 
 .header.active { filter: drop-shadow(var(--shadow-2)); }
