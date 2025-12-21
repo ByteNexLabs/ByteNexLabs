@@ -254,7 +254,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: var(--white-1);
+  background-color: rgba(5, 5, 5, 0.8) !important; backdrop-filter: blur(10px);
   padding-block: 15px;
   border-block-end: 1px solid var(--cultured);
   z-index: 4;
@@ -271,7 +271,7 @@ body {
 
 .logo {
   font-family: var(--ff-league-spartan);
-  color: var(--black);
+  color: #ffffff !important;
   font-size: 3.5rem;
   font-weight: var(--fw-700);
   line-height: 1;
