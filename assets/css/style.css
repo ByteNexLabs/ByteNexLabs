@@ -1191,3 +1191,12 @@ textarea.input-field {
 .service-card .card-title {
   color: #ffffff !important;
 }
+.footer {
+  background-color: #000000 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-block: 60px;
+}
+
+.footer-list-title, .copyright {
+  color: #ffffff !important;
+}
