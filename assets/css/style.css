@@ -1193,3 +1193,23 @@ textarea.input-field {
 .footer-list-title, .copyright {
   color: #ffffff !important;
 }
+/* Full Dark Mode Fix */
+body, .section {
+  background-color: #050505 !important;
+  color: #ffffff !important;
+}
+
+.section-title, .section-text {
+  color: #ffffff !important;
+}
+
+/* Service Card Modern Look */
+.service-card {
+  background-color: #0f1115 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Logo & Nav Fix */
+.logo, .navbar-link {
+  color: #ffffff !important;
+}
