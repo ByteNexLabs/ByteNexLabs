@@ -1213,3 +1213,24 @@ body, .section {
 .logo, .navbar-link {
   color: #ffffff !important;
 }
+
+.project-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(10px); /* Glass blur */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.4s ease;
+}
+
+.project-card:hover {
+  border-color: #00ffa3; /* Neon Green border */
+  box-shadow: 0 0 20px rgba(0, 255, 163, 0.3);
+  transform: translateY(-10px);
+}
+
+.card-tag {
+  color: #00ffa3 !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
