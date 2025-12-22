@@ -1358,3 +1358,12 @@ iframe {
 iframe:hover {
   filter: none; /* Mouse le jane par original colors dikhenge */
 }
+.map-container {
+  height: 300px !important; /* Deskpot ke liye height */
+}
+
+@media (max-width: 575px) {
+  .map-container {
+    height: 200px !important; /* Mobile ke liye aur bhi choti height */
+  }
+}
