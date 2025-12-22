@@ -1367,3 +1367,40 @@ iframe:hover {
     height: 200px !important; /* Mobile ke liye aur bhi choti height */
   }
 }
+.service-card {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(0, 255, 163, 0.1) !important;
+  padding: 30px !important;
+  border-radius: 20px !important;
+  transition: all 0.4s ease !important;
+  backdrop-filter: blur(10px);
+}
+
+.service-card:hover {
+  border-color: #00ffa3 !important;
+  background: rgba(0, 255, 163, 0.05) !important;
+  transform: translateY(-10px) !important;
+  box-shadow: 0 10px 30px rgba(0, 255, 163, 0.15) !important;
+}
+
+.service-card .card-title {
+  margin-block: 15px 10px;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.service-card:hover .card-title {
+  color: #00ffa3;
+}
+
+.service-card .card-icon {
+  font-size: 40px;
+  color: #00ffa3;
+  background: rgba(0, 255, 163, 0.1);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
