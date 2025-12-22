@@ -1349,3 +1349,12 @@ body, .section {
 .whatsapp-chat-button {
   animation: pulse-whatsapp 2s infinite;
 }
+/* Google Map Dark Mode Effect */
+iframe {
+  filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  transition: 0.5s;
+}
+
+iframe:hover {
+  filter: none; /* Mouse le jane par original colors dikhenge */
+}
