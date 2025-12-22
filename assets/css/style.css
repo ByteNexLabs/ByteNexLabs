@@ -1286,3 +1286,29 @@ body, .section {
   70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
   100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
+
+/* --- MODERN FLOATING WHATSAPP BUTTON --- */
+.whatsapp-float {
+  position: fixed !important;
+  width: 60px !important;
+  height: 60px !important;
+  bottom: 25px !important;
+  right: 25px !important;
+  background-color: #25d366 !important;
+  color: #FFF !important;
+  border-radius: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 30px !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
+  z-index: 999999 !important;
+  transition: 0.3s;
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
