@@ -5,19 +5,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BytenexLabs – Professional Website Design & Digital Services</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #080c14;
-    --surface: #0d1420;
-    --surface2: #111a2e;
-    --accent: #00d4ff;
-    --accent2: #7b5cfa;
-    --accent3: #00ffb3;
-    --text: #e8edf5;
-    --muted: #7a8ba0;
-    --border: rgba(0,212,255,0.12);
-    --glow: 0 0 40px rgba(0,212,255,0.18);
+    /* Eco Fruits Poster Inspired Palette */
+    --bg-main: #ffffff;
+    --bg-alt: #f9fbfd;
+    --text-dark: #2b2b2b;
+    --text-muted: #6b7280;
+    
+    /* Gradients */
+    --hero-grad: linear-gradient(135deg, #a4e44c, #4fb843);
+    --contact-grad: linear-gradient(135deg, #ffb6c1, #ff6b81);
+    
+    /* Solid Accents */
+    --accent-orange: #ffb142;
+    --accent-green: #379634;
+    --accent-light-green: #cbe86b;
+    --accent-pink: #ff9ff3;
+    
+    --shadow-soft: 0 15px 35px rgba(0,0,0,0.05);
+    --shadow-glow: 0 15px 30px rgba(79, 184, 67, 0.3);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,516 +33,380 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
-    color: var(--text);
+    background: var(--bg-main);
+    color: var(--text-dark);
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 16px;
     line-height: 1.7;
     overflow-x: hidden;
   }
 
-  h1,h2,h3,h4 { font-family: 'Outfit', sans-serif; line-height: 1.15; }
-
-  /* ── NOISE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 9999; opacity: .45;
-  }
+  h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; line-height: 1.2; color: var(--text-dark); }
 
   /* ── NAVBAR ── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 1.1rem 5vw;
-    background: rgba(8,12,20,0.85);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-    transition: box-shadow .3s;
+    padding: 1rem 5vw;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    transition: all .3s ease;
   }
-  nav.scrolled { box-shadow: 0 4px 40px rgba(0,0,0,.5); }
+  nav.scrolled { box-shadow: var(--shadow-soft); }
 
-  .logo { font-size: 1.9rem;
+  .logo { 
+    font-size: 1.8rem;
     font-family: 'Outfit', sans-serif;
-    letter-spacing: -.02em;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    font-weight: 900;
+    color: var(--accent-green);
     text-decoration: none;
+    letter-spacing: -0.02em;
   }
 
-  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
-    color: var(--muted); font-size: .92rem; text-decoration: none;
-    font-weight: 500; letter-spacing: .03em; text-transform: uppercase;
-    transition: color .25s;
+    color: var(--text-dark); font-size: 0.95rem; text-decoration: none;
+    font-weight: 600; transition: color .25s;
   }
-  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover { color: var(--accent-green); }
 
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-  .hamburger span { width: 26px; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+  .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; padding: 5px; }
+  .hamburger span { width: 28px; height: 3px; background: var(--accent-green); border-radius: 3px; transition: .3s; }
 
+  /* MOBILE MENU */
   .mobile-menu {
-    display: none; flex-direction: column; gap: 1.2rem;
-    position: fixed; top: 64px; left: 0; right: 0;
-    background: var(--surface); padding: 2rem;
-    border-bottom: 1px solid var(--border); z-index: 998;
+    display: none; flex-direction: column; gap: 1.5rem;
+    position: fixed; top: 70px; left: 0; right: 0;
+    background: #fff; padding: 2rem;
+    border-bottom: 1px solid #eee; z-index: 998;
+    box-shadow: var(--shadow-soft);
+    text-align: center;
   }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a { color: var(--text); text-decoration: none; font-size: 1.1rem; font-weight: 600; }
+  .mobile-menu.open { display: flex; animation: slideDown 0.3s ease forwards; }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .mobile-menu a { color: var(--text-dark); text-decoration: none; font-size: 1.1rem; font-weight: 700; }
+  .mobile-menu a:hover { color: var(--accent-green); }
 
   /* ── BUTTONS ── */
   .btn {
-    display: inline-flex; align-items: center; gap: .5rem;
-    padding: .8rem 1.8rem; border-radius: 6px;
-    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: .93rem;
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+    padding: 0.9rem 2rem; border-radius: 50px;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.95rem;
     text-decoration: none; cursor: pointer; border: none;
-    letter-spacing: .04em; transition: all .28s ease;
+    transition: all .3s ease;
   }
   .btn-primary {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    background: var(--accent-orange);
     color: #fff;
-    box-shadow: 0 0 24px rgba(0,212,255,.25);
+    box-shadow: 0 10px 20px rgba(255, 177, 66, 0.3);
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,212,255,.45); }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(255, 177, 66, 0.4); }
+
+  .btn-white {
+    background: #fff;
+    color: var(--accent-green);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  .btn-white:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0,0,0,0.15); }
 
   .btn-outline {
     background: transparent;
-    border: 1.5px solid var(--accent);
-    color: var(--accent);
+    border: 2px solid var(--accent-green);
+    color: var(--accent-green);
   }
-  .btn-outline:hover { background: rgba(0,212,255,.08); transform: translateY(-2px); }
-
-  .btn-whatsapp {
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    color: #fff;
-    box-shadow: 0 0 24px rgba(37,211,102,.25);
-  }
-  .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(37,211,102,.45); }
+  .btn-outline:hover { background: var(--accent-green); color: #fff; }
 
   /* ── SECTION UTILS ── */
   section { padding: 6rem 5vw; }
+  .section-header { text-align: center; margin-bottom: 4rem; }
   .section-label {
     display: inline-block;
-    font-size: .75rem; font-weight: 700; letter-spacing: .18em;
-    text-transform: uppercase; color: var(--accent);
-    margin-bottom: .9rem;
-    padding: .3rem .9rem;
-    border: 1px solid rgba(0,212,255,.25);
-    border-radius: 100px;
-    background: rgba(0,212,255,.06);
-  }
-  .section-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
+    font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent-green);
     margin-bottom: 1rem;
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    background: rgba(55, 150, 52, 0.1);
   }
-  .section-sub {
-    color: var(--muted); font-size: 1.05rem; max-width: 540px;
-    margin-bottom: 3rem;
-  }
-
-  .gradient-text {
-    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  .section-title { font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; }
+  .section-sub { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
   /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding-top: 7rem;
+  #hero { padding-top: 8rem; padding-bottom: 2rem; display: flex; flex-direction: column; align-items: center; }
+  
+  .hero-container {
+    background: var(--hero-grad);
+    width: 100%; max-width: 1200px;
+    border-radius: 40px;
+    padding: 5rem 4rem;
+    color: #fff;
+    display: flex; justify-content: space-between; align-items: center;
     position: relative; overflow: hidden;
+    box-shadow: var(--shadow-glow);
   }
 
-  .hero-bg {
-    position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,212,255,.07) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 80% at 10% 80%, rgba(123,92,250,.07) 0%, transparent 65%);
-  }
-
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(0,212,255,.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,212,255,.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black, transparent);
-  }
-
-  .hero-content { position: relative; z-index: 2; max-width: 700px; }
-
+  .hero-content { position: relative; z-index: 2; max-width: 600px; width: 100%; }
+  
   .hero-badge {
-    display: inline-flex; align-items: center; gap: .5rem;
-    font-size: .8rem; font-weight: 600; letter-spacing: .1em;
-    color: var(--accent3); text-transform: uppercase;
-    margin-bottom: 1.5rem;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+    margin-bottom: 1.5rem; letter-spacing: 2px;
   }
   .hero-badge::before {
-    content: ''; width: 8px; height: 8px;
-    background: var(--accent3); border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%,100% { box-shadow: 0 0 0 0 rgba(0,255,179,.5); }
-    50% { box-shadow: 0 0 0 6px rgba(0,255,179,0); }
+    content: ''; width: 30px; height: 2px; background: #fff;
   }
 
-  .hero-title {
-    font-size: clamp(2.6rem, 6vw, 4.8rem);
-    font-weight: 800; line-height: 1.08;
-    margin-bottom: 1.4rem;
-    letter-spacing: -.03em;
-  }
-
-  .hero-sub {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: var(--muted); margin-bottom: 2.4rem;
-    max-width: 500px; line-height: 1.65;
-  }
-
+  .hero-title { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; color: #fff; margin-bottom: 1rem; line-height: 1.1; word-wrap: break-word; }
+  .hero-sub { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2.5rem; font-weight: 500; }
+  
   .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-  .hero-stats {
-    display: flex; gap: 2.5rem; margin-top: 4rem;
-    flex-wrap: wrap;
-  }
-  .stat { }
-  .stat-num {
-    font-family: 'Outfit', sans-serif;
-    font-size: 2rem; font-weight: 800;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .stat-label { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+  /* Hero Visual SVG */
+  .hero-visual svg { max-width: 100%; height: auto; }
 
-  .hero-visual {
-    position: absolute; right: -2vw; top: 50%;
-    transform: translateY(-50%);
-    width: 42vw; max-width: 560px;
-    opacity: .18; pointer-events: none;
-    z-index: 1;
+  /* Floating Stats */
+  .hero-stats-wrapper {
+    background: #fff;
+    border-radius: 24px;
+    padding: 2rem 3rem;
+    display: flex; gap: 3rem;
+    box-shadow: var(--shadow-soft);
+    margin-top: -3rem; /* Overlap effect */
+    position: relative; z-index: 5;
+    flex-wrap: wrap; justify-content: center;
+    width: 90%; max-width: 900px;
   }
-  .hex-grid svg { width: 100%; height: auto; }
+  .stat-num { font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--accent-green); }
+  .stat-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
 
   /* ── ABOUT ── */
-  #about { background: var(--surface); }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 5rem; align-items: center;
+  #about { background: var(--bg-alt); }
+  .about-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
   }
-  .about-avatar-wrap {
-    position: relative;
+  
+  .about-text-box h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; }
+  .about-text-box p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem; }
+  
+  .founder-card {
+    display: inline-flex; align-items: center; gap: 1rem;
+    background: #fff; padding: 1rem 1.5rem; border-radius: 50px;
+    box-shadow: var(--shadow-soft); margin-top: 1rem;
   }
-  /*.about-avatar {
-    width: 100%; aspect-ratio: 1;
-    background: linear-gradient(135deg, var(--accent2), var(--accent));
-    border-radius: 24px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Outfit', sans-serif;
-    font-size: 5rem; font-weight: 800; color: rgba(255,255,255,.9);
-    position: relative; overflow: hidden;
-    box-shadow: 0 24px 80px rgba(0,212,255,.2);
-    max-width: 320px;
-    margin: 0 auto;
-    */
+  .founder-av { width: 50px; height: 50px; border-radius: 50%; background: var(--accent-orange); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.2rem; }
+  .founder-info h4 { font-size: 1.1rem; margin: 0; }
+  .founder-info span { font-size: 0.85rem; color: var(--text-muted); }
+
+  /* 4 Colored Grids */
+  .about-grids {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
   }
-  .about-avatar::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,.1));
+  .grid-card {
+    padding: 2rem 1.5rem; border-radius: 24px;
+    color: #fff; display: flex; flex-direction: column; justify-content: space-between;
+    transition: transform 0.3s;
   }
-  .about-tag {
-    position: absolute; bottom: -1rem; right: -1rem;
-    background: var(--accent3); color: #080c14;
-    font-size: .78rem; font-weight: 700; letter-spacing: .08em;
-    padding: .45rem 1rem; border-radius: 6px;
-    text-transform: uppercase;
-  }
-  .about-name { font-size: 2.4rem; font-weight: 800; margin-bottom: .3rem; }
-  .about-role { color: var(--accent); font-size: 1rem; font-weight: 500; margin-bottom: 1.5rem; }
-  .about-desc { color: var(--muted); font-size: 1.05rem; line-height: 1.75; margin-bottom: 2rem; }
+  .grid-card:hover { transform: translateY(-5px); }
+  .grid-card h3 { font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem; }
+  .grid-card p { font-size: 0.9rem; opacity: 0.9; line-height: 1.4; }
+  
+  .c-orange { background: var(--accent-orange); }
+  .c-light-green { background: var(--accent-light-green); color: var(--text-dark); }
+  .c-light-green h3 { color: var(--text-dark); }
+  .c-pink { background: var(--accent-pink); }
+  .c-dark-green { background: var(--accent-green); }
 
   /* ── SERVICES ── */
-  #services { }
+  #services { background: var(--bg-main); }
   .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 3rem;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
   }
   .service-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem 1.8rem;
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
     transition: all .3s ease;
-    position: relative; overflow: hidden;
-    cursor: default;
+    box-shadow: var(--shadow-soft);
   }
-  .service-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transform: scaleX(0); transform-origin: left;
-    transition: transform .35s ease;
-  }
-  .service-card:hover { transform: translateY(-6px); border-color: rgba(0,212,255,.3); box-shadow: var(--glow); }
-  .service-card:hover::before { transform: scaleX(1); }
-
+  .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: var(--accent-light-green); }
+  
   .service-icon {
-    width: 52px; height: 52px;
-    background: rgba(0,212,255,.1);
-    border-radius: 12px;
+    width: 60px; height: 60px;
+    background: rgba(55, 150, 52, 0.1); color: var(--accent-green);
+    border-radius: 16px;
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1.2rem;
-    font-size: 1.5rem;
-    transition: background .3s;
+    margin-bottom: 1.5rem;
   }
-  .service-card:hover .service-icon { background: rgba(0,212,255,.2); }
-  .service-name { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
-  .service-desc { color: var(--muted); font-size: .93rem; }
+  .service-name { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.8rem; }
+  .service-desc { color: var(--text-muted); font-size: 1rem; }
 
   /* ── PORTFOLIO ── */
-  #portfolio { background: var(--surface); }
+  #portfolio { background: var(--bg-alt); }
   .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem; margin-top: 3rem;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem;
   }
   .project-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-    transition: all .3s;
+    background: #fff; border-radius: 30px; padding: 1.5rem;
+    box-shadow: var(--shadow-soft); transition: transform 0.3s;
+    text-align: center;
   }
-  .project-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,212,255,.15); border-color: rgba(0,212,255,.3); }
+  .project-card:hover { transform: translateY(-10px); }
+  
   .project-thumb {
-    height: 200px;
-    background: linear-gradient(135deg, #0d1a2e, #1a2a4e);
+    height: 220px; border-radius: 20px;
+    background: radial-gradient(circle, rgba(164,228,76,0.3) 0%, rgba(255,255,255,0) 70%);
     display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
+    position: relative; overflow: hidden; margin-bottom: 1.5rem;
   }
-  .project-thumb img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-  .project-thumb::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(0,212,255,.08), rgba(123,92,250,.08));
-  }
- 
+  .project-thumb img { width: 80%; height: auto; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+  
   .project-tag {
     position: absolute; top: 1rem; left: 1rem;
-    background: rgba(0,212,255,.2); border: 1px solid rgba(0,212,255,.3);
-    color: var(--accent); font-size: .72rem; font-weight: 700;
-    padding: .2rem .7rem; border-radius: 100px; letter-spacing: .08em;
-    text-transform: uppercase;
+    background: var(--accent-green); color: #fff;
+    font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 50px;
   }
-  .project-body { padding: 1.8rem; }
-  .project-name { font-size: 1.25rem; font-weight: 700; margin-bottom: .5rem; }
-  .project-desc { color: var(--muted); font-size: .93rem; margin-bottom: 1.5rem; }
+  .project-name { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .project-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
 
   /* ── REVIEWS ── */
-  #reviews { }
-  .reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem; margin-top: 3rem;
-  }
+  #reviews { background: var(--bg-main); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
   .review-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
-    position: relative;
-    transition: all .3s;
+    background: var(--bg-alt); border-radius: 24px; padding: 2.5rem;
+    border: 1px solid #f0f0f0; transition: all 0.3s;
   }
-  .review-card:hover { transform: translateY(-4px); box-shadow: var(--glow); }
-  .review-quote {
-    font-size: 2.5rem;
-    color: var(--accent); opacity: .4;
-    line-height: 1; margin-bottom: .5rem;
-    font-family: Georgia, serif;
-  }
-  .review-text { font-size: 1rem; color: var(--text); line-height: 1.65; margin-bottom: 1.2rem; }
-  .stars { font-size: 1.1rem; letter-spacing: .1em; }
-  .reviewer { display: flex; align-items: center; gap: .8rem; margin-top: 1.2rem; }
+  .review-card:hover { box-shadow: var(--shadow-soft); background: #fff; }
+  .review-quote-icon { color: var(--accent-orange); margin-bottom: 1rem; }
+  .review-text { font-size: 1.05rem; color: var(--text-dark); font-style: italic; margin-bottom: 1.5rem; }
+  .reviewer { display: flex; align-items: center; gap: 1rem; }
   .reviewer-av {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent2), var(--accent));
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: .85rem; color: #fff;
+    width: 45px; height: 45px; border-radius: 50%;
+    background: var(--accent-light-green); color: var(--text-dark);
+    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem;
   }
-  .reviewer-name { font-weight: 600; font-size: .9rem; }
-  .reviewer-tag { font-size: .8rem; color: var(--muted); }
+  .reviewer-name { font-weight: 700; font-size: 1rem; display: block; }
+  .reviewer-tag { font-size: 0.85rem; color: var(--text-muted); }
 
   /* ── CONTACT ── */
-  #contact { background: var(--surface); }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem; align-items: start;
+  #contact { padding-bottom: 4rem; }
+  .contact-container {
+    background: var(--contact-grad);
+    border-radius: 40px; padding: 5rem 4vw;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    color: #fff; box-shadow: 0 20px 40px rgba(255, 107, 129, 0.2);
   }
-  .contact-info { }
-  .contact-item {
-    display: flex; align-items: flex-start; gap: 1rem;
-    margin-bottom: 1.8rem;
-  }
+  
+  .contact-info h2 { color: #fff; font-size: 3rem; font-weight: 900; margin-bottom: 1rem; }
+  .contact-info > p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 3rem; }
+  
+  .contact-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
   .contact-icon {
-    width: 44px; height: 44px; flex-shrink: 0;
-    background: rgba(0,212,255,.1);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem;
+    width: 50px; height: 50px; background: rgba(255,255,255,0.2);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-  .contact-detail label { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; display: block; margin-bottom: .2rem; }
-  .contact-detail span { font-size: .98rem; color: var(--text); font-weight: 500; }
+  .contact-detail label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; display: block; }
+  .contact-detail span { font-size: 1.1rem; font-weight: 700; }
 
-  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
-  .form-group { display: flex; flex-direction: column; gap: .5rem; }
-  .form-group label { font-size: .82rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-  .form-group input, .form-group textarea {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    padding: .85rem 1rem;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: .98rem;
-    outline: none;
-    transition: border-color .25s;
-    resize: vertical;
+  .contact-form {
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.4);
+    padding: 2.5rem; border-radius: 30px;
+    display: flex; flex-direction: column; gap: 1.2rem;
   }
-  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
-  .form-group textarea { min-height: 120px; }
+  .form-group input, .form-group textarea {
+    width: 100%; background: #fff; border: none;
+    padding: 1rem 1.5rem; border-radius: 15px;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem;
+    color: var(--text-dark); outline: none; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+  }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+  .contact-form button { width: 100%; background: #fff; color: #ff6b81; border-radius: 15px; font-size: 1.1rem; }
+  .contact-form button:hover { background: var(--text-dark); color: #fff; }
 
   /* ── FOOTER ── */
   footer {
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    padding: 3.5rem 5vw 2rem;
+    padding: 4rem 5vw 2rem; background: var(--bg-alt); border-top: 1px solid #eee;
   }
-  .footer-top {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    gap: 3rem; flex-wrap: wrap; margin-bottom: 3rem;
-  }
-  .footer-brand .logo { font-size: 1.6rem; display: block; margin-bottom: .6rem; }
-  .footer-brand p { color: var(--muted); font-size: .9rem; max-width: 280px; }
-  .footer-links { display: flex; flex-direction: column; gap: .7rem; }
-  .footer-links h4 { font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .4rem; }
-  .footer-links a { color: var(--text); text-decoration: none; font-size: .93rem; transition: color .2s; }
-  .footer-links a:hover { color: var(--accent); }
+  .footer-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand .logo { display: block; margin-bottom: 1rem; }
+  .footer-brand p { color: var(--text-muted); font-size: 0.95rem; max-width: 300px; }
+  .footer-links h4 { font-size: 1rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-dark); }
+  .footer-links { display: flex; flex-direction: column; gap: 0.8rem; }
+  .footer-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: .2s; }
+  .footer-links a:hover { color: var(--accent-green); }
   .footer-bottom {
-    border-top: 1px solid var(--border);
-    padding-top: 1.5rem;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1rem;
+    border-top: 1px solid #e5e7eb; padding-top: 2rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
   }
-  .footer-bottom p { color: var(--muted); font-size: .85rem; }
+  .footer-bottom p { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
 
   /* ── WHATSAPP FLOATING ── */
-  .wa-float {
-    position: fixed; bottom: 2rem; right: 2rem; z-index: 9000;
-  }
+  .wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 9000; }
   .wa-btn {
-    width: 62px; height: 62px;
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    border-radius: 50%;
+    width: 60px; height: 60px; background: #25d366; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    text-decoration: none;
-    box-shadow: 0 6px 30px rgba(37,211,102,.45);
-    transition: all .3s;
-    animation: wa-bounce 2.5s ease-in-out infinite;
+    box-shadow: 0 6px 30px rgba(37,211,102,.4); transition: transform .3s;
+    animation: wa-bounce 2.5s infinite;
   }
-  .wa-btn:hover { transform: scale(1.12); box-shadow: 0 8px 40px rgba(37,211,102,.65); }
-  @keyframes wa-bounce {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-  }
-  .wa-btn svg { width: 30px; height: 30px; fill: #fff; }
-  .wa-tooltip {
-    position: absolute; right: 74px; bottom: 14px;
-    background: #fff; color: #111;
-    font-size: .82rem; font-weight: 600;
-    padding: .45rem 1rem; border-radius: 8px;
-    white-space: nowrap;
-    box-shadow: 0 4px 20px rgba(0,0,0,.25);
-    opacity: 0; pointer-events: none;
-    transform: translateX(8px);
-    transition: all .25s;
-  }
-  .wa-float:hover .wa-tooltip { opacity: 1; transform: translateX(0); }
-  .wa-tooltip::after {
-    content: '';
-    position: absolute; right: -6px; top: 50%;
-    transform: translateY(-50%);
-    border: 6px solid transparent;
-    border-right: none;
-    border-left-color: #fff;
-  }
+  .wa-btn:hover { transform: scale(1.1); }
+  @keyframes wa-bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .wa-btn svg { width: 32px; height: 32px; fill: #fff; }
 
-  /* ── ANIMATIONS ── */
-  .reveal {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity .7s ease, transform .7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: none; }
-  .reveal-delay-1 { transition-delay: .1s; }
-  .reveal-delay-2 { transition-delay: .2s; }
-  .reveal-delay-3 { transition-delay: .3s; }
-  .reveal-delay-4 { transition-delay: .4s; }
-  .reveal-delay-5 { transition-delay: .5s; }
-
-  /* ── DIVIDER ── */
-  .divider {
-    width: 60px; height: 3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    border-radius: 2px; margin: 1rem 0 2rem;
-  }
-
-  /* ── RESPONSIVE ── */
+  /* ── RESPONSIVE FIXES ── */
   @media (max-width: 900px) {
-    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .hero-visual { display: none; }
+    .about-layout, .contact-container { grid-template-columns: 1fr; }
+    .hero-container { padding: 4rem 2rem; text-align: center; justify-content: center; }
+    .hero-badge::before { display: none; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
+    .hero-visual { display: none; } /* Visual ko hide kiya clean look ke liye */
   }
 
   @media (max-width: 580px) {
     section { padding: 4rem 5vw; }
-    .hero-stats { gap: 1.5rem; }
-    .footer-top { flex-direction: column; gap: 2rem; }
+    
+    /* Fixing the overflow / cut-off issue */
+    .hero-container { 
+      padding: 3rem 1.5rem; 
+      border-radius: 30px; 
+    }
+    
+    .hero-title { 
+      font-size: 2.3rem; /* Reduced font size to fit mobile screens perfectly */
+    }
+    
+    .hero-sub {
+      font-size: 1rem;
+    }
+
+    .hero-btns {
+      flex-direction: column; /* Buttons ek ke niche ek mobile pe */
+      width: 100%;
+    }
+    
+    .hero-btns .btn { width: 100%; }
+
+    .hero-stats-wrapper { 
+      margin-top: 1.5rem; 
+      padding: 1.5rem; 
+      gap: 1.5rem; 
+      width: 100%;
+    }
+    
+    .stat-num { font-size: 1.8rem; }
+    
+    .contact-container { padding: 3rem 1.5rem; border-radius: 30px; }
+    .contact-info h2 { font-size: 2.2rem; }
+    .contact-form { padding: 1.5rem; }
+    .about-grids { grid-template-columns: 1fr; }
   }
 
-  /* Scroll snap helpers */
-  .tag-row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; }
-  .tag {
-    font-size: .75rem; font-weight: 700; padding: .3rem .8rem;
-    border-radius: 100px;
-    background: rgba(123,92,250,.15);
-    border: 1px solid rgba(123,92,250,.25);
-    color: var(--accent2);
-    letter-spacing: .06em; text-transform: uppercase;
-  }
-
-  /* form success */
-  .form-success {
-    display: none;
-    background: rgba(0,255,179,.08);
-    border: 1px solid rgba(0,255,179,.3);
-    border-radius: 10px;
-    padding: 1rem 1.4rem;
-    color: var(--accent3);
-    font-weight: 600;
-    text-align: center;
-  }
+  /* Form Success */
+  .form-success { display: none; background: #fff; color: var(--accent-green); padding: 1rem; border-radius: 12px; font-weight: 700; text-align: center; }
 </style>
 </head>
 <body>
@@ -554,7 +426,7 @@ object-fit:cover;
   </div>
 </nav>
 
-<!-- MOBILE MENU -->
+<!-- MOBILE MENU (Restored & Fixed) -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about" onclick="closeMenu()">About</a>
   <a href="#services" onclick="closeMenu()">Services</a>
@@ -565,82 +437,91 @@ object-fit:cover;
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-
-  <!-- decorative hex -->
-  <div class="hero-visual">
-    <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g stroke="#00d4ff" stroke-width="1" opacity="0.6">
-        <polygon points="250,60 320,100 320,180 250,220 180,180 180,100"/>
-        <polygon points="250,120 300,148 300,204 250,232 200,204 200,148"/>
-        <polygon points="370,140 420,168 420,224 370,252 320,224 320,168"/>
-        <polygon points="130,140 180,168 180,224 130,252 80,224 80,168"/>
-        <polygon points="250,280 320,318 320,394 250,432 180,394 180,318"/>
-        <polygon points="390,300 440,328 440,384 390,412 340,384 340,328"/>
-        <polygon points="110,300 160,328 160,384 110,412 60,384 60,328"/>
-      </g>
-      <circle cx="250" cy="150" r="4" fill="#00d4ff" opacity=".7"/>
-      <circle cx="370" cy="196" r="3" fill="#7b5cfa" opacity=".7"/>
-      <circle cx="130" cy="196" r="3" fill="#00ffb3" opacity=".7"/>
-      <circle cx="250" cy="356" r="4" fill="#00d4ff" opacity=".5"/>
-    </svg>
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="hero-badge">Available for new projects</div>
+      <h1 class="hero-title">Website Design & Digital Services</h1>
+      <p class="hero-sub">Modern, fast, and mobile-friendly websites that help businesses grow online. Built to convert.</p>
+      <div class="hero-btns">
+        <a href="#services" class="btn btn-white">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
+          View Services
+        </a>
+        <a href="https://wa.me/917384899003" target="_blank" class="btn btn-primary">
+          Start WhatsApp Chat
+        </a>
+      </div>
+    </div>
+    <!-- Decorative visual in hero -->
+    <div class="hero-visual" style="opacity: 0.9;">
+      <svg width="250" height="250" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="0.5">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
   </div>
 
-  <div class="hero-content">
-    <div class="hero-badge">Available for new projects</div>
-    <h1 class="hero-title">
-      Professional<br>
-      <span class="gradient-text">Website Design</span><br>
-      & Digital Services
-    </h1>
-    <p class="hero-sub">Modern websites that help businesses grow online. Fast, responsive, and built to convert.</p>
-    <div class="hero-btns">
-      <a href="#services" class="btn btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>
-        View Services
-      </a>
-      <a href="https://wa.me/917384899003?text=Hello%2C%20I%20want%20to%20create%20a%20website.%20Please%20send%20me%20details." target="_blank" class="btn btn-whatsapp">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.394A9.953 9.953 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2h-.001zm0 18.02a8.016 8.016 0 0 1-4.079-1.11l-.292-.173-3.031.848.851-3.12-.19-.304A8.02 8.02 0 1 1 12 20.02z"/></svg>
-        Start WhatsApp Chat
-      </a>
+  <div class="hero-stats-wrapper">
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Mobile Friendly</div>
     </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Mobile Friendly</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">Fast</div>
-        <div class="stat-label">Delivery</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">5★</div>
-        <div class="stat-label">Client Reviews</div>
-      </div>
+    <div class="stat">
+      <div class="stat-num">Fast</div>
+      <div class="stat-label">Delivery Time</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5★</div>
+      <div class="stat-label">Client Reviews</div>
     </div>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="about-grid">
-    <div class="about-avatar-wrap reveal">
-      <div class="about-avatar"></div>
-      <div class="about-tag">Founder</div>
+  <div class="about-layout">
+    <div class="about-text-box">
+      <span class="section-label">About Us</span>
+      <h2>Crafting digital experiences that stand out.</h2>
+      <p>BytenexLabs is a digital service brand focused on creating modern, fast, and mobile-friendly websites for businesses, creators, and startups. We combine clean design with powerful functionality.</p>
+      
+      <div class="founder-card">
+        <div class="founder-av">S</div>
+        <div class="founder-info">
+          <h4>Sagar Mandal</h4>
+          <span>Founder, BytenexLabs</span>
+        </div>
+      </div>
     </div>
-    <div class="reveal reveal-delay-2">
-      <span class="section-label">About</span>
-      <h2 class="about-name">Sagar Mandal</h2>
-      <p class="about-role">Founder of BytenexLabs</p>
-      <div class="divider"></div>
-      <p class="about-desc">BytenexLabs is a digital service brand focused on creating modern, fast and mobile-friendly websites for businesses, creators and startups. We combine clean design with powerful functionality to help you stand out online.</p>
-      <div class="tag-row">
-        <span class="tag">Web Design</span>
-        <span class="tag">UI/UX</span>
-        <span class="tag">E-commerce</span>
-        <span class="tag">Mobile First</span>
-        <span class="tag">Landing Pages</span>
+
+    <!-- 4 Colored Grids like Poster -->
+    <div class="about-grids">
+      <div class="grid-card c-orange">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="margin-bottom:1rem;"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+        <div>
+          <h3>Modern Design</h3>
+          <p>Fresh UI/UX to engage users.</p>
+        </div>
+      </div>
+      <div class="grid-card c-light-green">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2" style="margin-bottom:1rem;"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+        <div>
+          <h3>Fast Loading</h3>
+          <p>Optimized for peak speed.</p>
+        </div>
+      </div>
+      <div class="grid-card c-pink">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="margin-bottom:1rem;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+        <div>
+          <h3>Scalable</h3>
+          <p>Built for future growth.</p>
+        </div>
+      </div>
+      <div class="grid-card c-dark-green">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="margin-bottom:1rem;"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        <div>
+          <h3>Responsive</h3>
+          <p>Looks great on all devices.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -648,125 +529,127 @@ object-fit:cover;
 
 <!-- SERVICES -->
 <section id="services">
-  <div class="reveal">
+  <div class="section-header">
     <span class="section-label">What We Do</span>
-    <h2 class="section-title">Our <span class="gradient-text">Services</span></h2>
+    <h2 class="section-title">Our Services</h2>
     <p class="section-sub">Everything you need to establish a strong online presence and grow your business digitally.</p>
   </div>
+  
   <div class="services-grid">
-    <div class="service-card reveal reveal-delay-1">
-      <div class="service-icon">🏢</div>
-      <h3 class="service-name">Business Website Design</h3>
-      <p class="service-desc">Professional websites tailored for businesses to build credibility and attract customers online.</p>
+    <div class="service-card">
+      <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
+      <h3 class="service-name">Business Websites</h3>
+      <p class="service-desc">Professional websites tailored for businesses to build credibility and attract customers.</p>
     </div>
-    <div class="service-card reveal reveal-delay-2">
-      <div class="service-icon">🎨</div>
-      <h3 class="service-name">Portfolio Website Development</h3>
-      <p class="service-desc">Showcase your work with a stunning, custom-designed portfolio that makes a lasting impression.</p>
+    
+    <div class="service-card">
+      <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg></div>
+      <h3 class="service-name">Portfolio Design</h3>
+      <p class="service-desc">Showcase your work with a stunning, custom-designed portfolio that makes an impression.</p>
     </div>
-    <div class="service-card reveal reveal-delay-3">
-      <div class="service-icon">🚀</div>
-      <h3 class="service-name">Landing Page Design</h3>
+    
+    <div class="service-card">
+      <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+      <h3 class="service-name">Landing Pages</h3>
       <p class="service-desc">High-converting landing pages designed to turn visitors into leads and customers.</p>
     </div>
-    <div class="service-card reveal reveal-delay-4">
-      <div class="service-icon">🛒</div>
-      <h3 class="service-name">E-commerce Website Development</h3>
-      <p class="service-desc">Complete online stores with smooth checkout, product management and payment integration.</p>
+    
+    <div class="service-card">
+      <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></div>
+      <h3 class="service-name">E-commerce</h3>
+      <p class="service-desc">Complete online stores with smooth checkout, product management and payments.</p>
     </div>
-    <div class="service-card reveal reveal-delay-5">
-      <div class="service-icon">🔄</div>
+    
+    <div class="service-card">
+      <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg></div>
       <h3 class="service-name">Website Redesign</h3>
-      <p class="service-desc">Transform your outdated website into a modern, fast and visually impressive digital platform.</p>
+      <p class="service-desc">Transform your outdated website into a modern, fast and visually impressive platform.</p>
     </div>
-    <div class="service-card reveal reveal-delay-1">
-      <div class="service-icon">📱</div>
-      <h3 class="service-name">Mobile Responsive Website</h3>
-      <p class="service-desc">Pixel-perfect responsive websites that look and perform flawlessly on every device and screen size.</p>
+    
+    <div class="service-card">
+      <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg></div>
+      <h3 class="service-name">Mobile Responsive</h3>
+      <p class="service-desc">Pixel-perfect responsive websites that perform flawlessly on every device screen.</p>
     </div>
   </div>
 </section>
 
 <!-- PORTFOLIO -->
 <section id="portfolio">
-  <div class="reveal">
+  <div class="section-header">
     <span class="section-label">Our Work</span>
-    <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
-    <p class="section-sub">A glimpse into the digital experiences we've crafted for our clients.</p>
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-sub">A glimpse into the digital experiences we've crafted.</p>
   </div>
+  
   <div class="portfolio-grid">
-    <div class="project-card reveal reveal-delay-2">
+    <div class="project-card">
       <div class="project-thumb">
-        <img src="dsc.jpg" alt="Description of the image">
-
-        
         <span class="project-tag">Live Project</span>
+        <img src="dsc.jpg" alt="Digital Service Center">
       </div>
-      <div class="project-body">
-        <h3 class="project-name">Digital Service Center</h3>
-        <p class="project-desc">A digital platform offering multiple useful online tools and services. Built for accessibility, speed and a seamless user experience.</p>
-        <a href="https://digital-service-center.vercel.app" target="_blank" class="btn btn-outline" style="font-size:.85rem;padding:.65rem 1.4rem;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-          Visit Project
-        </a>
-      </div>
+      <h3 class="project-name">Digital Service Center</h3>
+      <p class="project-desc">A digital platform offering multiple online tools and services. Built for accessibility & speed.</p>
+      <a href="https://digital-service-center.vercel.app" target="_blank" class="btn btn-outline" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Visit Project</a>
     </div>
-    <!-- placeholder card -->
-    <div class="project-card reveal reveal-delay-3" style="opacity:.5;pointer-events:none;">
-      <div class="project-thumb" style="align-items:center;justify-content:center;flex-direction:column;gap:.5rem;">
-        <span style="font-size:2.5rem;opacity:.3;">+</span>
-        <span style="font-size:.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;">Your Project Here</span>
+    
+    <div class="project-card" style="opacity: 0.7;">
+      <div class="project-thumb" style="background: radial-gradient(circle, rgba(200,200,200,0.3) 0%, rgba(255,255,255,0) 70%);">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a0a0a0" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
       </div>
-      <div class="project-body">
-        <h3 class="project-name">Next Project</h3>
-        <p class="project-desc">We're working on more exciting projects. Get in touch to be featured here.</p>
-        <span class="btn btn-outline" style="font-size:.85rem;padding:.65rem 1.4rem;opacity:.5;">Coming Soon</span>
-      </div>
+      <h3 class="project-name">Your Next Project</h3>
+      <p class="project-desc">We're working on more exciting projects. Get in touch to be featured here.</p>
+      <span class="btn btn-outline" style="padding: 0.6rem 1.5rem; font-size: 0.9rem; border-color: #ccc; color: #888;">Coming Soon</span>
     </div>
   </div>
 </section>
 
 <!-- REVIEWS -->
 <section id="reviews">
-  <div class="reveal">
-    <span class="section-label">Client Reviews</span>
-    <h2 class="section-title">What Clients <span class="gradient-text">Say</span></h2>
-    <p class="section-sub">Real feedback from real clients who trusted BytenexLabs with their digital presence.</p>
+  <div class="section-header">
+    <span class="section-label">Testimonials</span>
+    <h2 class="section-title">What Clients Say</h2>
   </div>
+  
   <div class="reviews-grid">
-    <div class="review-card reveal reveal-delay-1">
-      <div class="review-quote">"</div>
-      <p class="review-text">Very professional website design and fast delivery. The result exceeded my expectations!</p>
-      <div class="stars">⭐⭐⭐⭐⭐</div>
+    <div class="review-card">
+      <div class="review-quote-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M14 17h3l2-4V7h-6v6h3M6 17h3l2-4V7H5v6h3"></path></svg>
+      </div>
+      <p class="review-text">"Very professional website design and fast delivery. The result exceeded my expectations!"</p>
       <div class="reviewer">
         <div class="reviewer-av">C1</div>
         <div>
-          <div class="reviewer-name">Happy Client</div>
-          <div class="reviewer-tag">Business Owner</div>
+          <span class="reviewer-name">Happy Client</span>
+          <span class="reviewer-tag">Business Owner</span>
         </div>
       </div>
     </div>
-    <div class="review-card reveal reveal-delay-2">
-      <div class="review-quote">"</div>
-      <p class="review-text">Affordable service and great support throughout the entire process. Truly outstanding work.</p>
-      <div class="stars">⭐⭐⭐⭐⭐</div>
+    
+    <div class="review-card">
+      <div class="review-quote-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M14 17h3l2-4V7h-6v6h3M6 17h3l2-4V7H5v6h3"></path></svg>
+      </div>
+      <p class="review-text">"Affordable service and great support throughout the entire process. Truly outstanding work."</p>
       <div class="reviewer">
         <div class="reviewer-av">C2</div>
         <div>
-          <div class="reviewer-name">Satisfied Client</div>
-          <div class="reviewer-tag">Entrepreneur</div>
+          <span class="reviewer-name">Satisfied Client</span>
+          <span class="reviewer-tag">Entrepreneur</span>
         </div>
       </div>
     </div>
-    <div class="review-card reveal reveal-delay-3">
-      <div class="review-quote">"</div>
-      <p class="review-text">Highly recommended for website design services. Clean, modern and exactly what I needed.</p>
-      <div class="stars">⭐⭐⭐⭐⭐</div>
+    
+    <div class="review-card">
+      <div class="review-quote-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M14 17h3l2-4V7h-6v6h3M6 17h3l2-4V7H5v6h3"></path></svg>
+      </div>
+      <p class="review-text">"Highly recommended for website design services. Clean, modern and exactly what I needed."</p>
       <div class="reviewer">
         <div class="reviewer-av">C3</div>
         <div>
-          <div class="reviewer-name">Valued Client</div>
-          <div class="reviewer-tag">Startup Founder</div>
+          <span class="reviewer-name">Valued Client</span>
+          <span class="reviewer-tag">Startup Founder</span>
         </div>
       </div>
     </div>
@@ -775,60 +658,41 @@ object-fit:cover;
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-grid">
-    <div class="reveal">
-      <span class="section-label">Contact</span>
-      <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
-      <div class="divider"></div>
-      <p style="color:var(--muted);margin-bottom:2.5rem;">Ready to take your business online? Let's talk about your project.</p>
-
+  <div class="contact-container">
+    <div class="contact-info">
+      <h2>Let's Connect & Build</h2>
+      <p>Ready to take your business online? Reach out to discuss your project requirements.</p>
+      
       <div class="contact-item">
-        <div class="contact-icon">📍</div>
+        <div class="contact-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
         <div class="contact-detail">
-          <label>Business Address</label>
-          <span>Balarampur, Purulia, West Bengal 723143</span>
+          <label>Address</label>
+          <span>Balarampur, Purulia, WB 723143</span>
         </div>
       </div>
+      
       <div class="contact-item">
-        <div class="contact-icon">💬</div>
+        <div class="contact-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
         <div class="contact-detail">
           <label>WhatsApp</label>
           <span>+91 7384899003</span>
         </div>
       </div>
-      <div class="contact-item">
-        <div class="contact-icon">🌐</div>
-        <div class="contact-detail">
-          <label>Brand</label>
-          <span>BytenexLabs</span>
-        </div>
-      </div>
-
-      <a href="https://wa.me/917384899003?text=Hello%2C%20I%20want%20to%20create%20a%20website.%20Please%20send%20me%20details." target="_blank" class="btn btn-whatsapp" style="margin-top:1.5rem;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.394A9.953 9.953 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2h-.001zm0 18.02a8.016 8.016 0 0 1-4.079-1.11l-.292-.173-3.031.848.851-3.12-.19-.304A8.02 8.02 0 1 1 12 20.02z"/></svg>
-        Chat on WhatsApp
-      </a>
     </div>
-
-    <div class="reveal reveal-delay-2">
+    
+    <div>
       <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
         <div class="form-group">
-          <label for="name">Your Name</label>
-          <input type="text" id="name" placeholder="Enter your full name" required>
+          <input type="text" id="name" placeholder="Your Name" required>
         </div>
         <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" placeholder="Enter your phone number" required>
+          <input type="tel" id="phone" placeholder="Phone Number" required>
         </div>
         <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" placeholder="Tell us about your project..." required></textarea>
+          <textarea id="message" placeholder="Message or Project Details..." required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
-          Send via WhatsApp
-        </button>
-        <div class="form-success" id="formSuccess">✅ Redirecting to WhatsApp...</div>
+        <button type="submit" class="btn">Send via WhatsApp</button>
+        <div class="form-success" id="formSuccess">Redirecting to WhatsApp...</div>
       </form>
     </div>
   </div>
@@ -851,19 +715,18 @@ object-fit:cover;
     <div class="footer-links">
       <h4>Contact</h4>
       <a href="https://wa.me/917384899003" target="_blank">+91 7384899003</a>
-      <span style="color:var(--muted);font-size:.9rem;">Balarampur, Purulia</span>
-      <span style="color:var(--muted);font-size:.9rem;">West Bengal 723143</span>
+      <span>Balarampur, Purulia</span>
+      <span>West Bengal 723143</span>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 BytenexLabs &nbsp;·&nbsp; Founded by Sagar Mandal</p>
-    <p style="color:var(--muted);font-size:.8rem;">Balarampur, Purulia, West Bengal 723143</p>
+    <p>© 2026 BytenexLabs · Founded by Sagar Mandal</p>
+    <p>All Rights Reserved.</p>
   </div>
 </footer>
 
 <!-- WHATSAPP FLOAT -->
 <div class="wa-float">
-  <div class="wa-tooltip">Chat with us!</div>
   <a class="wa-btn" href="https://wa.me/917384899003?text=Hello%2C%20I%20want%20to%20create%20a%20website.%20Please%20send%20me%20details." target="_blank" aria-label="WhatsApp Chat">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
@@ -878,20 +741,14 @@ object-fit:cover;
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
   });
 
-  // Mobile menu
+  // Mobile Menu Toggle Functions
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
   }
+  
   function closeMenu() {
     document.getElementById('mobileMenu').classList.remove('open');
   }
-
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  reveals.forEach(r => observer.observe(r));
 
   // Contact form -> WhatsApp
   function submitForm(e) {
